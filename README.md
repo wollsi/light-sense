@@ -25,7 +25,7 @@ Micropython knows two special files:
 - __[boot.py](code/boot.py)__ which is executed directly after booting.
 - __[main.py](code/main.py)__ which is exectued after boot.py completes.
 
-In this app boot.py is used to load the config parameters from [config.json](config.json). The main.py holds the logic and executes after all config parameters are loaded.
+In this app boot.py is used to load the config parameters from config.json. The main.py holds the logic and executes after all config parameters are loaded.
 
 ## config.json
 
@@ -41,7 +41,7 @@ First assemble the circuit as shown above.
 
 Connect the controller to your PC and install the firmware as described here: [Install micropython](https://docs.micropython.org/en/latest/esp8266/tutorial/intro.html#getting-the-firmware)
 
-Edit the [config.json](config.json) and add the parameters you need.
+Edit the [config.json](resources/config.json) and add the parameters you need.
 
 To upload the files you can use [ampy](https://github.com/scientifichackers/ampy). Upload the following files:
 
