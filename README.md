@@ -25,14 +25,27 @@ Micropython knows two special files:
 - __[boot.py](code/boot.py)__ which is executed directly after booting.
 - __[main.py](code/main.py)__ which is exectued after boot.py completes.
 
-In this app boot.py is used to load the config parameters from config.json. The main.py holds the logic and executes after all config parameters are loaded.
+In this app ```boot.py``` is used to load the config parameters from config.json. The main.py holds the logic and executes after all config parameters are loaded.
+
+The file ```data``` is used to store the last meassured value, and ```cycles``` is used to store the remaining cylces before shuting down.
 
 ## config.json
 
 The config.json holds all parameters for easy configuration of the app.
 
-```yaml
-sleep_time=10000 # the milliseconds to sleep between each measurement
+```jsonc
+{
+    "wifi" : {
+        "ssid" : "YOUR_SSID", // SSID of your wifi AP
+        "passwd" : "WiF1-p@s$wd" // password of your wifi AP
+    },
+    "rest" : {
+        "url" : "http://your-server/endpoint", // the endpoint to send the data to
+        "config" : "http://your-server/endpoint/config" // the enpoint to get the config from
+    },
+    "sleep_time" : 10000, // the milliseconds to sleep between each measurement
+    "operation_time" : 40000 // milliseconds to operate before shutdown
+}
 ```
 
 ## Quick start
@@ -47,5 +60,10 @@ To upload the files you can use [ampy](https://github.com/scientifichackers/ampy
 
 - boot.py
 - main.py
-- data.txt
 - config.json
+- data
+- cycles
+
+When booting up, the script will request updated configuration parameters from the given endpoint (rest.config). At the moment it will only read ```operation_time``` and ```sleep_time```.
+
+If there is a change in state detected, a message with either 1 (ON) or 0 (OFF) as payload is send to the configured endpoint (rest.url).

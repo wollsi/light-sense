@@ -1,3 +1,12 @@
 {
-    "sleep_time" : 10000
+    "wifi" : {
+        "ssid" : "YOUR_SSID",
+        "passwd" : "WiF1-p@s$wd"
+    },
+    "rest" : {
+        "url" : "http://your-server/endpoint",
+        "config" : "http://your-server/endpoint/config"
+    },
+    "sleep_time" : 10000,
+    "operation_time" : 40000
 }
