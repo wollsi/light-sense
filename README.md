@@ -56,7 +56,7 @@ Connect the controller to your PC and install the firmware as described here: [I
 
 Edit the [config.json](resources/config.json) and add the parameters you need.
 
-For convenience I added two flows for node-red which provide the necessary endpoints and a small but sufficient dashboard to create and change the configuration update file. You can import them into node-red. Before importing you need to install the plugin [node-red-dashboard](https://flows.nodered.org/node/node-red-dashboard). Then import the communication-flow.json (providing the REST endpoints) and the dashboard-flow.json (providing the dashboard). To use the endpoints set 
+For convenience I added two flows for node-red which provide the necessary endpoints and a small but sufficient dashboard to create and change the configuration update file. You can import them into node-red. Before importing you need to install the plugin [node-red-dashboard](https://flows.nodered.org/node/node-red-dashboard). Then import the ```communication-flow.json``` (providing the REST endpoints) and the ```dashboard-flow.json``` (providing the dashboard). To use the endpoints set 
 
 ```jsonc
 {
