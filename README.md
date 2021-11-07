@@ -56,6 +56,23 @@ Connect the controller to your PC and install the firmware as described here: [I
 
 Edit the [config.json](resources/config.json) and add the parameters you need.
 
+For convenience I added two flows for node-red which provide the necessary endpoints and a small but sufficient dashboard to create and change the configuration update file. You can import them into node-red. Before importing you need to install the plugin [node-red-dashboard](https://flows.nodered.org/node/node-red-dashboard). Then import the communication-flow.json (providing the REST endpoints) and the dashboard-flow.json (providing the dashboard). To use the endpoints set 
+
+```jsonc
+{
+    ...
+
+    "rest": {
+        "url" : "http://node-red-ip:port/endpoint",
+        "config" : "http://node-red-ip:port/endpoint/config"
+    },
+
+    ...
+}
+```
+
+in the config.json.
+
 To upload the files you can use [ampy](https://github.com/scientifichackers/ampy). Upload the following files:
 
 - boot.py
@@ -66,4 +83,4 @@ To upload the files you can use [ampy](https://github.com/scientifichackers/ampy
 
 When booting up, the script will request updated configuration parameters from the given endpoint (rest.config). At the moment it will only read ```operation_time``` and ```sleep_time```.
 
-If there is a change in state detected, a message with either 1 (ON) or 0 (OFF) as payload is send to the configured endpoint (rest.url).
+If there is a change in state detected, a message with either "1" (ON) or "0" (OFF) as payload is send to the configured endpoint (rest.url).

@@ -1,0 +1,268 @@
+[
+    {
+        "id": "590abc44cea3852b",
+        "type": "tab",
+        "label": "Kommunikation",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6bd98241e16a55ad",
+        "type": "function",
+        "z": "590abc44cea3852b",
+        "name": "translate message",
+        "func": "old_payload = msg.payload;\nif (old_payload === \"1\") {\n    msg.payload = \"LED turned on\";\n} else if (old_payload === \"0\") {\n    msg.payload = \"LED turned off\";\n} else {\n    msg.payload = \"Error\"\n}\nreturn msg;\n    \n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 460,
+        "wires": [
+            [
+                "d3fd5a77477f2c66"
+            ]
+        ]
+    },
+    {
+        "id": "bf4299d8c8b3a88d",
+        "type": "ui_text",
+        "z": "590abc44cea3852b",
+        "group": "f8c9daf7e2e75184",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "value",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 290,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "729842c03c9185dd",
+        "type": "http in",
+        "z": "590abc44cea3852b",
+        "name": "GET /endpoint/config",
+        "url": "/endpoint/config",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 160,
+        "wires": [
+            [
+                "059d7c2c18d11cd5",
+                "9783984509a4707d"
+            ]
+        ]
+    },
+    {
+        "id": "fb52c2c63730daf9",
+        "type": "http response",
+        "z": "590abc44cea3852b",
+        "name": "config response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 680,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "059d7c2c18d11cd5",
+        "type": "file in",
+        "z": "590abc44cea3852b",
+        "name": "",
+        "filename": "sense/config.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "fb52c2c63730daf9"
+            ]
+        ]
+    },
+    {
+        "id": "83b64d24a40353c2",
+        "type": "http in",
+        "z": "590abc44cea3852b",
+        "name": "POST /endpoint",
+        "url": "/endpoint",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 240,
+        "wires": [
+            [
+                "e7a70de3278daa0e",
+                "e87d6969fc46bf52"
+            ]
+        ]
+    },
+    {
+        "id": "baa3e2c33df55d9a",
+        "type": "link in",
+        "z": "590abc44cea3852b",
+        "name": "handler",
+        "links": [
+            "e7a70de3278daa0e"
+        ],
+        "x": 75,
+        "y": 460,
+        "wires": [
+            [
+                "6bd98241e16a55ad",
+                "bf4299d8c8b3a88d"
+            ]
+        ]
+    },
+    {
+        "id": "e7a70de3278daa0e",
+        "type": "link out",
+        "z": "590abc44cea3852b",
+        "name": "handler",
+        "mode": "link",
+        "links": [
+            "baa3e2c33df55d9a"
+        ],
+        "x": 335,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e87d6969fc46bf52",
+        "type": "http response",
+        "z": "590abc44cea3852b",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 380,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ef6c6d9bcc939191",
+        "type": "ui_toast",
+        "z": "590abc44cea3852b",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "Config got pulled",
+        "name": "config call",
+        "x": 660,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "424b8e0e54ffa622",
+        "type": "comment",
+        "z": "590abc44cea3852b",
+        "name": "signal handling",
+        "info": "",
+        "x": 100,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "53d3c29f9cd74f2d",
+        "type": "comment",
+        "z": "590abc44cea3852b",
+        "name": "endpoint definition",
+        "info": "",
+        "x": 110,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "9783984509a4707d",
+        "type": "json",
+        "z": "590abc44cea3852b",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "ef6c6d9bcc939191"
+            ]
+        ]
+    },
+    {
+        "id": "d3fd5a77477f2c66",
+        "type": "ui_toast",
+        "z": "590abc44cea3852b",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "LED changed its state",
+        "name": "LED changed state",
+        "x": 590,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "c1267d491aae63e2",
+        "type": "inject",
+        "z": "590abc44cea3852b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "str",
+        "x": 100,
+        "y": 580,
+        "wires": [
+            [
+                "6bd98241e16a55ad"
+            ]
+        ]
+    },
+    {
+        "id": "f8c9daf7e2e75184",
+        "type": "ui_group",
+        "name": "Standard",
+        "tab": "d781eb33d1b3194f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "d781eb33d1b3194f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

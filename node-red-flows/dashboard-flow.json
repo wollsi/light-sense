@@ -1,0 +1,341 @@
+[
+    {
+        "id": "efb7789fcecc387c",
+        "type": "tab",
+        "label": "UI",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c5a98989488c9ac3",
+        "type": "ui_numeric",
+        "z": "efb7789fcecc387c",
+        "name": "sleep_time",
+        "label": "Sleep Time",
+        "tooltip": "How much time between measurements? (s)",
+        "group": "f8c9daf7e2e75184",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "sleep_time",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "3600",
+        "step": "1",
+        "x": 570,
+        "y": 280,
+        "wires": [
+            [
+                "4a80a52a537900c4"
+            ]
+        ]
+    },
+    {
+        "id": "7c6cd48cbac6f93a",
+        "type": "ui_numeric",
+        "z": "efb7789fcecc387c",
+        "name": "operation_time",
+        "label": "Operation Time",
+        "tooltip": "How long do you want to operate? (s)",
+        "group": "f8c9daf7e2e75184",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "operation_time",
+        "topicType": "str",
+        "format": "{{value}}",
+        "min": "1",
+        "max": "86400",
+        "step": "1",
+        "x": 580,
+        "y": 200,
+        "wires": [
+            [
+                "4a80a52a537900c4"
+            ]
+        ]
+    },
+    {
+        "id": "4a80a52a537900c4",
+        "type": "join",
+        "z": "efb7789fcecc387c",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 790,
+        "y": 80,
+        "wires": [
+            [
+                "44b087f93fa82ff9"
+            ]
+        ]
+    },
+    {
+        "id": "06cc692221af6b93",
+        "type": "file",
+        "z": "efb7789fcecc387c",
+        "name": "",
+        "filename": "sense/config.json",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 910,
+        "y": 160,
+        "wires": [
+            [
+                "499b4da710e0ac67"
+            ]
+        ]
+    },
+    {
+        "id": "fbcdd9cd1ce97938",
+        "type": "ui_button",
+        "z": "efb7789fcecc387c",
+        "name": "",
+        "group": "f8c9daf7e2e75184",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Save",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "complete",
+        "topicType": "msg",
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "23a31e1bd3ec1012",
+                "6cf5b4e3c24b680e"
+            ]
+        ]
+    },
+    {
+        "id": "23a31e1bd3ec1012",
+        "type": "change",
+        "z": "efb7789fcecc387c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "complete",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "4a80a52a537900c4"
+            ]
+        ]
+    },
+    {
+        "id": "1b5faa78fd58b828",
+        "type": "ui_toast",
+        "z": "efb7789fcecc387c",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "Configuration saved!",
+        "name": "",
+        "x": 910,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "28767adcb81e24d2",
+        "type": "file in",
+        "z": "efb7789fcecc387c",
+        "name": "",
+        "filename": "sense/config.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 270,
+        "y": 400,
+        "wires": [
+            [
+                "4dd2222317490415"
+            ]
+        ]
+    },
+    {
+        "id": "c38b7a58d8d55c54",
+        "type": "inject",
+        "z": "efb7789fcecc387c",
+        "name": "RELOAD",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "28767adcb81e24d2"
+            ]
+        ]
+    },
+    {
+        "id": "6cf5b4e3c24b680e",
+        "type": "function",
+        "z": "efb7789fcecc387c",
+        "name": "",
+        "func": "op_msg = {};\nop_msg.payload = msg.payload.operation_time;\nsl_msg = {};\nsl_msg.payload = msg.payload.sleep_time;\nreturn [op_msg, sl_msg];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "7c6cd48cbac6f93a"
+            ],
+            [
+                "c5a98989488c9ac3"
+            ]
+        ]
+    },
+    {
+        "id": "4dd2222317490415",
+        "type": "json",
+        "z": "efb7789fcecc387c",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "5dd7f9cef6ef72d6"
+            ]
+        ]
+    },
+    {
+        "id": "499b4da710e0ac67",
+        "type": "json",
+        "z": "efb7789fcecc387c",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 910,
+        "y": 200,
+        "wires": [
+            [
+                "1b5faa78fd58b828"
+            ]
+        ]
+    },
+    {
+        "id": "44b087f93fa82ff9",
+        "type": "function",
+        "z": "efb7789fcecc387c",
+        "name": "mult by 1000",
+        "func": "new_msg = {};\nnew_msg.payload = {};\nnew_msg.payload.operation_time = msg.payload.operation_time*1000;\nnew_msg.payload.sleep_time = msg.payload.sleep_time*1000;\nreturn new_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 80,
+        "wires": [
+            [
+                "06cc692221af6b93"
+            ]
+        ]
+    },
+    {
+        "id": "5dd7f9cef6ef72d6",
+        "type": "function",
+        "z": "efb7789fcecc387c",
+        "name": "div by 1000",
+        "func": "new_msg = {};\nnew_msg.payload = {};\nnew_msg.payload.operation_time = msg.payload.operation_time/1000;\nnew_msg.payload.sleep_time = msg.payload.sleep_time/1000;\nreturn new_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 300,
+        "wires": [
+            [
+                "6cf5b4e3c24b680e"
+            ]
+        ]
+    },
+    {
+        "id": "6216f8769589932a",
+        "type": "comment",
+        "z": "efb7789fcecc387c",
+        "name": "load config on reload",
+        "info": "",
+        "x": 110,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f8c9daf7e2e75184",
+        "type": "ui_group",
+        "name": "Standard",
+        "tab": "d781eb33d1b3194f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "d781eb33d1b3194f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
