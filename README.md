@@ -10,7 +10,9 @@ As microcontroller a D1 Mini (ESP8266 based) is used. The photo resistor is a GL
 
 The basic layout of the circuit can be found as sketch on a breadboard in the following picture:
 
-![Circuit on breadboard](circuit_breadboard.png "Circuit on breadboard")
+| ![Circuit on breadboard](circuit_breadboard.png "Circuit on breadboard") |
+| -- |
+| *This image was created with Fritzing* |
 
 The red connections are the 3V3 connection, the blue one is ground. The yellow connection is transfering data (meassuring voltage) and the green one is needed to be able to wake from deepsleep.
 
